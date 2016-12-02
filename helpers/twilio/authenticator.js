@@ -14,7 +14,7 @@ function authenticate(req, res, next) {
   const header = req.headers['x-twilio-signature'];
   const body = req.body;
 
-  if (twilio.validateRequest(twilioAuthToken, header, urlRoot, body)) {
+  if (twilio.validateRequest(twilioAuthToken, header, req.url, body)) {
     next();
   }
   else {
