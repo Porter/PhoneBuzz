@@ -1,15 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const twilio = require("twilio");
 
 router.use("/", (req, res) => {
-  fs.readFile("xml/phone_buzz.xml", (err, buffer) => {
-    if (err) {
-      console.log(err);
-      return res.end("An error occured");
-    }
-    res.end(buffer.toString());
+  const resp = new twilio.TwimlResponse();
+  resp.gather({ timeout:30, action:"/twilio/playback", finishOnKey:"*" }, function() {
+    this.say('Please enter the number you would like me to count to, and then press *');
   });
+
+  res.writeHead(200, { 'Content-Type':'text/xml' });
+  res.end(resp.toString());
 })
 
 module.exports = router;

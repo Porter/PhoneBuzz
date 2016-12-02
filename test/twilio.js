@@ -24,13 +24,7 @@ describe("xml responding endpoints", function() {
         if (err) { return done(err); }
         try {
           expect(body).to.eql(
-`<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-    <Gather timeout="30" finishOnKey="*" action="/twilio/playback">
-        <Say>Please enter your the number you would like me to count to, fizz buzz style</Say>
-    </Gather>
-</Response>
-`);
+`<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="30" action="/twilio/playback" finishOnKey="*"><Say>Please enter the number you would like me to count to, and then press *</Say></Gather></Response>`);
           done();
         }
         catch(e) {
