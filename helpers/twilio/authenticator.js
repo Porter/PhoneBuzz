@@ -13,13 +13,14 @@ function authenticate(req, res, next) {
 
   const header = req.headers['x-twilio-signature'];
   const body = req.body;
+  const url = req.get('host') + req.originalUrl;
 
-  if (twilio.validateRequest(twilioAuthToken, header, req.url, body)) {
+  if (twilio.validateRequest(twilioAuthToken, header, url, body)) {
     next();
   }
   else {
     console.log("not valid");
-    console.log(twilioAuthToken, header, req.url, body);
+    console.log(twilioAuthToken, header, url, body);
     console.log(JSON.stringify(req.headers));
     console.log(JSON.stringify(body));
     res.writeHead(403, { 'Content-Type':'text/plain' });
