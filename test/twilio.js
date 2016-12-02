@@ -1,5 +1,6 @@
 const expect = require("chai").expect;
 const request = require('request');
+const twilioHelper = require("../helpers/twilio/twilio_helper");
 
 describe("xml responding endpoints", function() {
 
@@ -31,5 +32,43 @@ describe("xml responding endpoints", function() {
         }
       });
     });
+  });
+});
+
+describe("twilioHelper", function() {
+  describe("#isValidPhoneNumber", function() {
+    it("should be good for (925) 255 3528", function() {
+      expect(twilioHelper.isValidPhoneNumber("(925) 255 3528")).to.eql(true);
+    });
+
+    it("should be good for 925-255-3528", function() {
+      expect(twilioHelper.isValidPhoneNumber("925-255-3528")).to.eql(true);
+    });
+
+    it("should be good for +19252553528", function() {
+      expect(twilioHelper.isValidPhoneNumber("+19252553528")).to.eql(true);
+    });
+
+    it("should be good for +1925 255 3528", function() {
+      expect(twilioHelper.isValidPhoneNumber("+1925 255 3528")).to.eql(true);
+    });
+
+    it("should not be good for (92) 255 3528", function() {
+      expect(twilioHelper.isValidPhoneNumber("(92) 255 3528")).to.eql(false);
+    });
+
+    it("should not be good for 925-x255-3528", function() {
+      expect(twilioHelper.isValidPhoneNumber("925-x255-3528")).to.eql(false);
+    });
+
+    it("should not be good for +192'52553528", function() {
+      expect(twilioHelper.isValidPhoneNumber("+192'52553528")).to.eql(false);
+    });
+
+    it("should not be good for +255 3528", function() {
+      expect(twilioHelper.isValidPhoneNumber("+255 3528")).to.eql(false);
+    });
+
+    it("should not be good for (9252)553528"); //TODO
   });
 });
