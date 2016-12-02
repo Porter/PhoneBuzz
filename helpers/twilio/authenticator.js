@@ -15,7 +15,7 @@ function authenticate(req, res, next) {
   const body = req.body;
   const url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
-  if (twilio.validateRequest(req, twilioAuthToken)) {
+  if (twilio.validateExpressRequest(req, twilioAuthToken)) {
     next();
   }
   else {
