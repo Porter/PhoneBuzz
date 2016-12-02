@@ -1,8 +1,10 @@
 const express = require("express");
 const app = express();
+var bodyParser = require('body-parser')
 
 const twilioRouter = require("./routes/twilio");
 
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use("/twilio", twilioRouter);
 

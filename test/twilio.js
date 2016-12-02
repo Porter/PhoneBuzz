@@ -32,5 +32,18 @@ describe("xml responding endpoints", function() {
         }
       });
     });
+
+    it("should reject a post without authentication", function(done) {
+      request.post('http://localhost:8000/twilio/init', function (err, response, body) {
+        if (err) { return done(err); }
+        try {
+          expect(body).to.eql("something's wrong with your authentication");
+          done();
+        }
+        catch(e) {
+          done(e);
+        }
+      });
+    });
   });
 });
