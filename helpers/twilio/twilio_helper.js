@@ -6,7 +6,7 @@ const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = twilio(twilioAccountSID, twilioAuthToken);
 
-function test(number, callback) {
+function test(number, delay, callback) {
   if (!isValidPhoneNumber(number)) {
     return callback("Sorry, but " + number + " is not a valid number");
   }

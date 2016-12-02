@@ -1,15 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const twilioHelper = require("../../helpers/twilio/twilio_helper");
+const demoHelper = require("../../helpers/demo/demo_helper");
 
 router.post("/", (req, res) => {
-  twilioHelper.test(req.body.phoneNumber, (err, resp) => {
+  demoHelper.parseDelay(req.body.delay, (err, seconds) {
     if (err) {
-      console.log(err);
-      return res.end("something went wrong, check the logs");
+      return res.end(err.toString());
     }
-    res.end("call made");
+    res.end("we'll call in " + seconds + " seconds");
+    setTimeout(() => {
+      twilioHelper.test(req.body.phoneNumber, (err, resp) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }, seconds*1000)
   });
+
 })
 
 module.exports = router;
