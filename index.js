@@ -1,13 +1,11 @@
 const express = require("express");
-const twilio = require("twilio");
 const app = express();
 
-const twilioAccountSID = "AC9730bade7ee8a91b7a7ce491f3061a8d";
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
+const twilioRouter = require("./routes/twilio");
 
-app.get("/", (req, res) => {
-  res.end(twilioAuthToken + ", " + twilioAccountSID);
-});
+
+app.use("/twilio", twilioRouter);
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {

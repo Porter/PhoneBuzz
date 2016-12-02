@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+    <Gather timeout="30" finishOnKey="*" action="/twilio/playback">
+        <Say>Please enter your the number you would like me to count to fizz buzz style</Say>
+    </Gather>
+</Response>
