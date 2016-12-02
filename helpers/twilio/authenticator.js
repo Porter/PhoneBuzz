@@ -7,10 +7,6 @@ const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 const urlRoot = 'http://phonebuzzporter.herokuapp.com'
 
 function authenticate(req, res, next) {
-  if (req.method.toLowerCase() == "get") { // temporaily for testing
-    return next();
-  }
-
   const header = req.headers['x-twilio-signature'];
   const body = req.body;
   const url = req.protocol + '://' + req.get('host') + req.originalUrl;

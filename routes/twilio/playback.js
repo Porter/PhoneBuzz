@@ -4,7 +4,7 @@ const fs = require("fs");
 const twilio = require("twilio");
 const authenticator = require("../../helpers/twilio/authenticator");
 
-router.use("/", (req, res) => {
+router.use("/", authenticator, (req, res) => {
 
   const goTo = parseInt(req.body.Digits);
 

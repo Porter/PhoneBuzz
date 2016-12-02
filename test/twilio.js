@@ -8,7 +8,7 @@ describe("xml responding endpoints", function() {
       request('http://localhost:8000/', function (err, response, body) {
         if (err) { return done(err); }
         try {
-          expect(body).to.eql("ok");
+          expect(response.statusCode).to.eql(200);
           done();
         }
         catch(e) {
@@ -19,22 +19,8 @@ describe("xml responding endpoints", function() {
   });
 
   describe("/twilio/init", function() {
-    it("should be right", function(done) {
+    it("should reject without authentication", function(done) {
       request('http://localhost:8000/twilio/init', function (err, response, body) {
-        if (err) { return done(err); }
-        try {
-          expect(body).to.eql(
-`<?xml version="1.0" encoding="UTF-8"?><Response><Gather timeout="30" action="/twilio/playback" finishOnKey="*"><Say>Please enter the number you would like me to count to, and then press *</Say></Gather></Response>`);
-          done();
-        }
-        catch(e) {
-          done(e);
-        }
-      });
-    });
-
-    it("should reject a post without authentication", function(done) {
-      request.post('http://localhost:8000/twilio/init', function (err, response, body) {
         if (err) { return done(err); }
         try {
           expect(body).to.eql("something's wrong with your authentication");
