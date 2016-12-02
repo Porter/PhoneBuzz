@@ -6,7 +6,7 @@ const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = twilio(twilioAccountSID, twilioAuthToken);
 
-function test(number, delay, callback) {
+function test(number, callback) {
   if (!isValidPhoneNumber(number)) {
     return callback("Sorry, but " + number + " is not a valid number");
   }
@@ -14,6 +14,17 @@ function test(number, delay, callback) {
       to:number,
       from: '+19252593472', // the twilio number we am using
       url: 'http://phonebuzzporter.herokuapp.com/twilio/init'
+  }, callback);
+}
+
+function goToPlayBack(number, digits, callback) {
+  if (!isValidPhoneNumber(number)) {
+    return callback("Sorry, but " + number + " is not a valid number");
+  }
+  client.makeCall({
+      to:number,
+      from: '+19252593472', // the twilio number we am using
+      url: 'http://phonebuzzporter.herokuapp.com/twilio/playback?digits='+digits
   }, callback);
 }
 

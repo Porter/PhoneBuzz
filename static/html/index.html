@@ -7,10 +7,56 @@
     <br/>
     <p>I'm a little rushed, so you'll have to forgive this plain front end</p>
     <br/>
-    <form action="/demo/callme" method="post">
-      Delay: <input name="delay" type="text"/><br/><br/>
-      Phone Number: <input name="phoneNumber" placeholder="XXX-XXX-XXXX" type="tel"/><br/><br/>
+    <form id="form" action="/demo/callme" method="post">
+      Delay: <input name="delay" id="inputDelay" type="text"/><br/><br/>
+      Phone Number: <input name="phoneNumber" id="phoneNumberInput" placeholder="XXX-XXX-XXXX" type="tel"/><br/><br/>
+      <input name="id" id="idInput" type="hidden"/>
       <input type="submit" value="Call me!"/>
     </form>
+
+    <div id="previous">
+
+    </div>
   </body>
+
+  <script type="text/javascript">
+    document.getElementById("idInput").value = "";
+
+    function getFunction(delay, phoneNumber, id) {
+      return function() {
+        document.getElementById("idInput").value = id;
+        document.getElementById("form").submit();
+      }
+    }
+
+    function getButton(delay, phoneNumber, created, id) {
+      var button = document.createElement("button");
+      button.innerHTML = "Call " + phoneNumber + " in " + delay + ". This initially done at " + new Date(created).toString();
+
+      button.onclick = getFunction(delay, phoneNumber, id);
+
+      return button;
+    }
+
+    function get(url, callback) {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() {
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200) callback(xmlHttp.responseText);
+      }
+      xmlHttp.open("GET", url, true);
+      xmlHttp.send(null);
+    }
+
+    var div = document.getElementById("previous");
+    get("/demo/times", data => {
+      data = JSON.parse(data);
+      for (var i = 0; i < data.length; i++) {
+        var d = data[i];
+        div.appendChild(getButton(d.delay, d.phoneNumber, d.created, d._id));
+
+        div.appendChild(document.createElement("br"));
+        div.appendChild(document.createElement("br"));
+      }
+    });
+  </script>
 </html>
