@@ -10,7 +10,7 @@ function test(number, callback) {
   client.makeCall({
       to:number,
       from: '+19252593472', // the twilio number we am using
-      url: 'https://phonebuzzporter.herokuapp.com/twilio/init'
+      url: 'http://phonebuzzporter.herokuapp.com/twilio/init'
   }, callback);
 }
 
