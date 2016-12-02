@@ -4,7 +4,7 @@ const twilioHelper = require("../../helpers/twilio/twilio_helper");
 const demoHelper = require("../../helpers/demo/demo_helper");
 
 router.post("/", (req, res) => {
-  demoHelper.parseDelay(req.body.delay, (err, seconds) {
+  demoHelper.parseDelay(req.body.delay, (err, seconds) => {
     if (err) {
       return res.end(err.toString());
     }
