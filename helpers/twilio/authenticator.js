@@ -15,11 +15,15 @@ function authenticate(req, res, next) {
   const body = req.body;
 
   if (twilio.validateRequest(twilioAuthToken, header, urlRoot, body)) {
-      next();
+    next();
   }
   else {
-      res.writeHead(403, { 'Content-Type':'text/plain' });
-      res.end("something's wrong with your authentication");
+    console.log("not valid");
+    console.log(twilioAuthToken, header, urlRoot, body);
+    console.log(JSON.stringify(twilioAuthToken));
+    console.log(JSON.stringify(body));
+    res.writeHead(403, { 'Content-Type':'text/plain' });
+    res.end("something's wrong with your authentication");
   }
 }
 

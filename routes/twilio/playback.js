@@ -10,14 +10,17 @@ router.use("/", (req, res) => {
 
   const resp = new twilio.TwimlResponse();
 
-  if (goTo <= 0) {
-    resp.say("Next time, give me a number that's not zero. Goodbye");
-  }
   for (var i = 1; i <= goTo; i++) {
     if (i % 15 == 0) resp.say("Fizz Buzz");
     else if (i % 5 == 0) resp.say("Buzz");
     else if (i % 3 == 0) resp.say("Fizz");
     else resp.say("" + i);
+  }
+  if (goTo <= 0) {
+    resp.say("Next time, give me a number that's not zero. Goodbye");
+  }
+  else {
+    resp.say("Thanks for playing");
   }
 
 

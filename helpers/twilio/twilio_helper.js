@@ -6,14 +6,12 @@ const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 
 const client = twilio(twilioAccountSID, twilioAuthToken);
 
-function test() {
+function test(number, callback) {
   client.makeCall({
-      to:'+19252553528', // call me with those internship offers ;)
+      to:number,
       from: '+19252593472', // the twilio number we am using
       url: 'https://phonebuzzporter.herokuapp.com/twilio/init'
-  }, function(err, responseData) {
-    console.log("call initiated");
-  });
+  }, callback);
 }
 
 module.exports = {
