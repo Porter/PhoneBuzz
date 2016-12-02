@@ -7,7 +7,7 @@ const twilioHelper = require("./helpers/twilio/twilio_helper");
 const demoRouter = require("./routes/demo");
 const twilioRouter = require("./routes/twilio");
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/twilio", twilioRouter);
 app.use("/demo", demoRouter);
