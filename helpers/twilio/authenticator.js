@@ -13,7 +13,7 @@ function authenticate(req, res, next) {
 
   const header = req.headers['x-twilio-signature'];
   const body = req.body;
-  const url = req.get('host') + req.originalUrl;
+  const url = req.protocol + '://' + req.get('host') + req.originalUrl;
 
   if (twilio.validateRequest(twilioAuthToken, header, url, body)) {
     next();
