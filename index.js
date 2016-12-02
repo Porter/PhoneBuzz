@@ -6,6 +6,9 @@ const twilioRouter = require("./routes/twilio");
 
 app.use("/twilio", twilioRouter);
 
+app.get("/", (req, res) => {
+  res.end("ok");
+})
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
