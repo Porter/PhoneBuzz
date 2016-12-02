@@ -19,8 +19,8 @@ function authenticate(req, res, next) {
   }
   else {
     console.log("not valid");
-    console.log(twilioAuthToken, header, urlRoot, body);
-    console.log(JSON.stringify(twilioAuthToken));
+    console.log(twilioAuthToken, header, req.url, body);
+    console.log(JSON.stringify(req.headers));
     console.log(JSON.stringify(body));
     res.writeHead(403, { 'Content-Type':'text/plain' });
     res.end("something's wrong with your authentication");
