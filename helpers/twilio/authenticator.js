@@ -14,8 +14,7 @@ function authenticate(req, res, next) {
   const header = req.headers['x-twilio-signature'];
   const body = req.body;
 
-  // apparently auth token needs to be a buffer? Was getting a 500 message
-  if (twilio.validateRequest(new Buffer(twilioAuthToken), header, urlRoot, body)) {
+  if (twilio.validateRequest(twilioAuthToken, header, urlRoot, body)) {
       next();
   }
   else {
