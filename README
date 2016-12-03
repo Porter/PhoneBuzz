@@ -18,6 +18,9 @@ There's some sloppy javascript that displays buttons on the root page
 that can be pressed to repeat old calls, but the user will be asked again
 what number they want.
 
+Edit: I realized just know that that the buttons are broken, that's due to me
+reverting code on the back end. 
+
 If I had a little more time I could have created a new item in the database and
 passed on the id to initial.js which would go to twilio and then have twilio give
 the id back to playback.js which would then update the item with the number of
