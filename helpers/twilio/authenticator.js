@@ -1,7 +1,6 @@
 const twilio = require("twilio");
 const qs = require("querystring");
 
-const twilioAccountSID = "AC9730bade7ee8a91b7a7ce491f3061a8d";
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN;
 
 const urlRoot = 'http://phonebuzzporter.herokuapp.com'

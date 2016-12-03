@@ -4,9 +4,9 @@ const twilioHelper = require("../../helpers/twilio/twilio_helper");
 const demoHelper = require("../../helpers/demo/demo_helper");
 const DBHelper = require("../../helpers/db/db_helper");
 
-function helper(data, req, res) {
-  const delay = data.delay;
-  const phoneNumber = data.phoneNumber;
+router.post("/", (req, res) => {
+  const delay = req.body.delay;
+  const phoneNumber = req.body.phoneNumber;
 
   demoHelper.parseDelay(delay, (err, seconds) => {
     if (err) {
@@ -29,19 +29,6 @@ function helper(data, req, res) {
       });
     }, seconds*1000)
   });
-}
-
-
-router.post("/", (req, res) => {
-  const id = req.body.id;
-  if (id != "") {
-    DBHelper.getById(id, (err, result) => {
-      helper(result, req, res);
-    });
-  }
-  else {
-    helper(req.body, req, res);
-  }
 
 })
 

@@ -17,17 +17,6 @@ function test(number, callback) {
   }, callback);
 }
 
-function goToPlayBack(number, digits, callback) {
-  if (!isValidPhoneNumber(number)) {
-    return callback("Sorry, but " + number + " is not a valid number");
-  }
-  client.makeCall({
-      to:number,
-      from: '+19252593472', // the twilio number we am using
-      url: 'http://phonebuzzporter.herokuapp.com/twilio/playback?digits='+digits
-  }, callback);
-}
-
 function contains(arr, n) {
   for (var i = 0; i < arr.length; i++) {
     if (arr[i] == n) return true

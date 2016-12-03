@@ -1,0 +1,26 @@
+First things first run
+
+npm i
+
+To install dependencies
+Tests can be run with
+
+npm t
+
+and the server can be started with
+
+npm start
+
+
+I got through phase 1-3, and halfway through 4
+
+There's some sloppy javascript that displays buttons on the root page
+that can be pressed to repeat old calls, but the user will be asked again
+what number they want.
+
+If I had a little more time I could have created a new item in the database and
+passed on the id to initial.js which would go to twilio and then have twilio give
+the id back to playback.js which would then update the item with the number of
+digits used
+
+I worked from 11:04 to now, 4:05
